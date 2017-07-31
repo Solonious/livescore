@@ -12,7 +12,7 @@
         <div class="col-xs-2">
             <label for="country">Select country :</label>
             <select class="form-control" id="country">
-                <option *ngFor="let item of countries">{{item.country_name}}</option>
+                <option #country *ngFor="let item of countries; let i = index" >{{item.country_name}}</option>
             </select>
         </div>
         <div class="col-xs-2">
