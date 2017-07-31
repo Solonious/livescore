@@ -1,0 +1,28 @@
+<h2>Livescores</h2>
+<form>
+    <div class="form-group row">
+        <div class="col-xs-1">
+            <label for="date_from">Date from :</label>
+            <input class="form-control">
+        </div>
+        <div class="col-xs-1">
+            <label for="date_to">Date from :</label>
+            <input class="form-control">
+        </div>
+        <div class="col-xs-2">
+            <label for="country">Select country :</label>
+            <select class="form-control" id="country">
+                <option *ngFor="let item of countries">{{item.country_name}}</option>
+            </select>
+        </div>
+        <div class="col-xs-2">
+            <label for="league">Select league :</label>
+            <select class="form-control" id="league">
+                <option *ngFor="let item of leagues">{{item.league_name}}</option>
+            </select>
+        </div>
+        <button class="btn">Search</button>
+    </div>
+</form>
+<app-table></app-table>
+<button class="btn" routerLink="/home" routerLinkActive="active">Back</button>
