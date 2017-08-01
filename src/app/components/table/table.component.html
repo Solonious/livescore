@@ -12,7 +12,7 @@
 		</tr>
 		</thead>
 		<tbody *ngIf="data && data.length">
-		<tr *ngFor="let item of data">
+		<tr *ngFor="let item of data | paginate: {itemsPerPage: 10, currentPage: page, id: '1'}; let i = index">
 			<td>{{item.country_name}}</td>
 			<td>{{item.league_name}}</td>
 			<td>{{item.match_hometeam_name}}</td>
@@ -24,3 +24,8 @@
 		</tr>
 		</tbody>
 	</table>
+    <pagination-controls (pageChange)="page = $event" id="1"
+                         maxSize="5"
+                         directionLinks="true"
+                         autoHide="true">
+    </pagination-controls>
