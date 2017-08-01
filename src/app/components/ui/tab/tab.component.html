@@ -1,5 +1,6 @@
-<ngb-tabset>
-    <ngb-tab *ngFor="let item of data"><ng-template ngbTabTitle>Search <b>{{item.time | date: "HH:mm:ss"}}</b></ng-template>
+<ngb-tabset activeId={{data.length}}>
+    <ngb-tab *ngFor="let item of data; let i = index" id={{i+1}}>
+      <ng-template ngbTabTitle>Search <b>{{item.time | date: "HH:mm:ss"}}</b></ng-template>
         <ng-template ngbTabContent>
             <app-table [data]="item.data"></app-table>
         </ng-template>

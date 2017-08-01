@@ -45,7 +45,7 @@ export class LivescopeComponent implements OnInit {
           if (res.error) {
             this.errorTitle = res.message;
           }
-          this.tableDataTabs.unshift({time: new Date(), data: res});
+          this.tableDataTabs.push({time: new Date(), data: res});
         });
   }
   handleDatapickerFrom(data) {

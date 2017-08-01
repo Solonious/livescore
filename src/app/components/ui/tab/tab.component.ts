@@ -11,5 +11,7 @@ export class TabComponent implements OnInit {
 
   ngOnInit() {
   }
-
+deleteTab() {
+    console.log('deleted');
+}
 }
