@@ -1,20 +1,9 @@
-/* .menu {
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(121, 121, 121, 1);
-    border-radius: 0px;
-    text-align: center;
-    height: 150px;
-} */
-#center {
-	top: 50%; /* Отступ в процентах от верхнего края окна */
-	left: 50%; /* Отступ в процентах от левого края окна */
-	width: 450px; /* Ширина блока */
-	height: 450px; /* Высота блока */
-	position: absolute; /* Абсолютное позиционирование блока */
-	margin-top: -225px; /* Отрицательный отступ от верхнего края страницы, должен равняться половине высоты блока со знаком минус */
-	margin-left: -225px; /* Отрицательный отступ от левого края страницы, должен равняться половине высоты блока со знаком минус */
-    z-index: 1000;
-    border: 1px solid #000;
-    color: #000;
+.card {
+	margin-top: 6rem;
+}
+.card-title {
+	margin-bottom: 40px;
+}
+.card-block {
+	padding: 2rem;
 }

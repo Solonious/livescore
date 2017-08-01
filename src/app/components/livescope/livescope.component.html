@@ -1,34 +1,38 @@
-<h2>Livescores</h2>
 <div class="container">
-<form>
-    <div class="form-group row">
-        <div class="">
-            <label for="date_from">Date from :</label>
-            <ngbd-datepicker-popup></ngbd-datepicker-popup>
+<h2 class="title text-center">Livescores</h2>
+    <form>
+        <div class="form-group row justify-content-md-center">
+            <div class="datepicker">
+                <label for="date_from">Date from :</label>
+                <ngbd-datepicker-popup (getModel)="handleDatapickerFrom($event)"></ngbd-datepicker-popup>
+            </div>
+            <div class="datepicker">
+                <label for="date_to">Date from :</label>
+                <ngbd-datepicker-popup (getModel)="handleDatapickerTo($event)"></ngbd-datepicker-popup>
+            </div>
+            <div class="col-2">
+                <label for="country">Select country :</label>
+                <select class="form-control" id="country" [formControl]="country">
+                    <option selected>Select country</option>
+                    <option #country *ngFor="let item of countries; let i = index" [value]="item.country_id">{{item.country_name}}</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="league">Select league :</label>
+                <select class="form-control" id="league" [formControl]="league">
+                    <option selected>Select league</option>
+                    <option *ngFor="let item of leagues">{{item.league_name}}</option>
+                </select>
+            </div>
+            <div class="col">
+                <button class="btn" (click)="getEvents()">Search</button>
+            </div>
+            <div class="col-1">
+                <button class="btn" routerLink="/home" routerLinkActive="active">Back</button>
+            </div>
         </div>
-        <div class="">
-            <label for="date_to">Date from :</label>
-            <ngbd-datepicker-popup></ngbd-datepicker-popup>
-        </div>
-        <div class="col">
-            <label for="country">Select country :</label>
-            <select class="form-control" id="country">
-                <option #country *ngFor="let item of countries; let i = index" >{{item.country_name}}</option>
-            </select>
-        </div>
-        <div class="col">
-            <label for="league">Select league :</label>
-            <select class="form-control" id="league">
-                <option *ngFor="let item of leagues">{{item.league_name}}</option>
-            </select>
-        </div>
-        <div class="col">
-            <button class="btn">Search</button>
-        </div>
-        <div class="col">
-            <button class="btn" routerLink="/home" routerLinkActive="active">Back</button>
-        </div>
-    </div>
-</form>
-<app-table></app-table>
+    </form>
+    <app-tab [data]="tableDataTabs"></app-tab>
+    <h4 *ngIf="!errorTitle"class="text-center no-data">No data</h4>
+    <h4 *ngIf="errorTitle" class="text-center no-data">{{errorTitle}}</h4>
 </div>

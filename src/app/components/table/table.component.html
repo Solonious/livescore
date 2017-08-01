@@ -1,5 +1,4 @@
-<div class="container">
-	<table class="table">
+    <table class="table">
 		<thead>
 		<tr>
 			<th>Country Name</th>
@@ -12,17 +11,16 @@
 			<th>Match time</th>
 		</tr>
 		</thead>
-		<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+		<tbody *ngIf="data && data.length">
+		<tr *ngFor="let item of data">
+			<td>{{item.country_name}}</td>
+			<td>{{item.league_name}}</td>
+			<td>{{item.match_hometeam_name}}</td>
+			<td>{{item.match_awayteam_name}}</td>
+			<td>{{item.match_hometeam_score}}/{{item.match_awayteam_score}}</td>
+			<td>{{item.match_status}}</td>
+			<td>{{item.match_date}}</td>
+			<td>{{item.match_time}}</td>
 		</tr>
 		</tbody>
 	</table>
-</div>

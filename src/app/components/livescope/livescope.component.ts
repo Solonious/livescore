@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import { AppService } from '../../app-service'
+import { AppService } from '../../app-service';
 
 import { Countries } from '../../shared/countries';
 import { Leagues } from '../../shared/leagues';
@@ -14,19 +15,43 @@ import { Leagues } from '../../shared/leagues';
 export class LivescopeComponent implements OnInit {
   countries: Countries[];
   leagues: Leagues[];
-  constructor(private appService: AppService) { }
+  dateFrom = new FormControl();
+  dateTo = new FormControl();
+  country = new FormControl('Select country');
+  league = new FormControl('Select league');
+  tableDataTabs = [];
+  errorTitle: string;
+  constructor(private appService: AppService) {}
 
   ngOnInit() {
     this.getCountries();
-    this.getLeagues();
+    this.country.valueChanges.subscribe(val => {
+      this.getLeagues(val);
+    });
   }
   getCountries(): void {
     this.appService.getCountries()
     .subscribe(res => this.countries = res);
   }
-  getLeagues(): void {
-    this.appService.getLeagues()
-    .subscribe(res => this.leagues = res);
+  getLeagues(id: any): void {
+    this.appService.getLeagues(id)
+    .subscribe(res => {
+      this.leagues = res;
+    });
   }
-  getStandings(): void {}
+  getEvents(): void {
+    this.appService.getEvents(this.dateFrom.value, this.dateTo.value, this.league.value)
+        .subscribe(res => {
+          if (res.error) {
+            this.errorTitle = res.message;
+          }
+          this.tableDataTabs.unshift({time: new Date(), data: res});
+        });
+  }
+  handleDatapickerFrom(data) {
+    this.dateFrom.setValue(`${data.year}-${data.month}-${data.day}`);
+  }
+  handleDatapickerTo(data): void {
+    this.dateTo.setValue(`${data.year}-${data.month}-${data.day}`);
+  }
 }

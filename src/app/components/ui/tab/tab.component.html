@@ -1,3 +1,7 @@
-<p>
-  tab works!
-</p>
+<ngb-tabset>
+    <ngb-tab *ngFor="let item of data"><ng-template ngbTabTitle>Search <b>{{item.time | date: "HH:mm:ss"}}</b></ng-template>
+        <ng-template ngbTabContent>
+            <app-table [data]="item.data"></app-table>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
