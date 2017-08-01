@@ -1,9 +1,9 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent }   from './components/home/home.component';
-import { SettingComponent }      from './components/setting/setting.component';
-import { LivescopeComponent } from './components/livescope/livescope.component';
+import { HomeComponent }   from '../components/home/home.component';
+import { SettingComponent }      from '../components/setting/setting.component';
+import { LivescopeComponent } from '../components/livescope/livescope.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },

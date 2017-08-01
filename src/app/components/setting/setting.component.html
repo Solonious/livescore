@@ -1,16 +1,20 @@
-<div>
-    <div class="col-xs-2">
-        <label for="current_api">Current API :</label>
-        <select class="form-control" id="current_api">
-            <option *ngFor="let item of apis" [ngValue]="item">{{item}}</option>
-        </select>
-    </div>
-    <div class="col-xs-2">
-        <label for="interval">Update interval :</label>
-        <select class="form-control" id="interval">
-            <option *ngFor="let item of intervals" [ngValue]="item">{{item}} m</option>
-        </select>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <div class="card text-center">
+                <div class="card-block">
+                <label for="current_api">Current API :</label>
+                <select class="form-control" id="current_api">
+                    <option *ngFor="let item of apis" [ngValue]="item">{{item}}</option>
+                </select>
+                <label for="interval">Update interval :</label>
+                <select class="form-control" id="interval">
+                    <option *ngFor="let item of intervals" [ngValue]="item">{{item}} m</option>
+                </select>
+                <button class="btn" routerLink="/home" routerLinkActive="active">Back</button>
+                <button class="btn">Save settings</button>    
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<button class="btn" routerLink="/home" routerLinkActive="active">Back</button>
-<button class="btn">Save settings</button>
