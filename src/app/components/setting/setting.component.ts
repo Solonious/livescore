@@ -12,26 +12,33 @@ import { AppService } from '../../app-service';
 export class SettingComponent implements OnInit {
   @Output() apiKey = new EventEmitter<string>();
   @Output() currentApi = new EventEmitter<string>();
-  apiKeyForm = new FormControl();
-  currentApiForm = new FormControl('Select API');
-  apis = [{
+  apis = [
+    {
     id: 0,
+    title: 'Select API',
+    value: 'select api'
+  }, {
+    id: 1,
     title:'apifootbal',
     value: 'https://apifootball.com/api/?action='
   }, {
-    id: 1,
+    id: 2,
     title: 'example api',
-    value: ''
+    value: 'example'
   }];
+  apiKeyForm = new FormControl();
+  currentApiForm = new FormControl('Select API');
   intervals = [5, 10, 15, 30, 60];
-  showApi = false;
-  showUserName = false;
+  displayStatus: number;
   constructor(private service: AppService) { }
 
   ngOnInit() {
     this.currentApiForm.valueChanges.subscribe(res => {
-      this.showApi = res ? true : false;
-      this.showUserName = !res ? true : false;
+      console.log(res);
+      this.displayStatus = this.apis.filter(item => item.value === res)[0].id;
+      console.log(this.displayStatus);
+      // this.showApi = res ? true : false;
+      // this.showUserName = !res ? true : false;
     });
   }
   saveChanges() {

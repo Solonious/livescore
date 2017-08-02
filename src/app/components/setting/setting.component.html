@@ -6,8 +6,8 @@
                     <div class="form-group">
                         <label class="mr-sm-2" for="inlineFormCustomSelect">Current API:</label>
                         <select #api [formControl]="currentApiForm" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                            <option selected>Select API</option>
-                            <option *ngFor="let item of apis" [ngValue]="item.value">{{item.title}}</option>
+                            <!--<option selected>{{this.apis[0].title}}</option>-->
+                            <option selected *ngFor="let item of apis" [ngValue]="item.value">{{item.title}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -16,20 +16,29 @@
                             <option *ngFor="let item of intervals" [ngValue]="item">{{item}} min</option>
                         </select>
                     </div>
-                    <div *ngIf="showApi" class="inline-form">
+                  <div ngSwitch={{displayStatus}}>
+                    <ng-template ngSwitchCase="1">
+                      <div class="inline-form">
                         <label class="mr-sm-2" for="inlineFormInput">API Key :</label>
                         <input [formControl]="apiKeyForm" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
-                    </div>
-                    <div *ngIf="showUserName" class="user-panel">
+                      </div>
+                    </ng-template>
+                    <ng-template ngSwitchCase="2">
+                      <div class="user-panel">
                         <div class="inline-form">
-                            <label class="mr-sm-2" for="inlineFormInput">API username :</label>
-                            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
+                          <label class="mr-sm-2" for="inlineFormInput">API username :</label>
+                          <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
                         </div>
                         <div class="inline-form">
-                            <label class="mr-sm-2" for="inlineFormInput">API password :</label>
-                            <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
+                          <label class="mr-sm-2" for="inlineFormInput">API password :</label>
+                          <input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
                         </div>
-                    </div>
+                      </div>
+                    </ng-template>
+                    <ng-template ngSwitchDefault="0"></ng-template>
+                  </div>
+
+
                     <div class="control-panel">
                         <button class="btn" routerLink="/home" routerLinkActive="active">Back</button>
                         <button class="btn" (click)="saveChanges()">Save settings</button>
