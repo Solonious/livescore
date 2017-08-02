@@ -15,6 +15,7 @@ import { TableComponent } from './components/table/table.component';
 import { AppService } from './app-service';
 import { NgbdDatepickerPopup } from './components/ui/datepicker/datepicker.component';
 import { TabComponent } from './components/ui/tab/tab.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TabComponent } from './components/ui/tab/tab.component';
     LivescopeComponent,
     TableComponent,
     NgbdDatepickerPopup,
-    TabComponent
+    TabComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

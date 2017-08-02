@@ -32,9 +32,11 @@
             </div>
         </div>
     </form>
-  <h4  *ngIf="errorTitle" class="text-center no-data">{{errorTitle}}</h4>
-  <app-tab *ngIf="tableDataTabs.length; else unset" [data]="tableDataTabs"></app-tab>
-  <ng-template #unset>
-    <h4 class="text-center no-data">No data</h4>
-  </ng-template>
+  <app-tab *ngIf="tableDataTabs.length" [data]="tableDataTabs"></app-tab>
+  <div ngSwitch={{displayStatus}}>
+    <ng-template ngSwitchCase="0"><h4 class="text-center no-data">No data</h4></ng-template>
+    <ng-template ngSwitchCase="1"><h4  class="text-center no-data">{{errorTitle}}</h4></ng-template>
+  </div>
+<div class="" *ngIf="loading">
+  <app-loader [loading]="loading"></app-loader>
 </div>

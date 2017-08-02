@@ -13,6 +13,7 @@ import { Leagues } from '../../shared/leagues';
   providers: [AppService]
 })
 export class LivescopeComponent implements OnInit {
+  loading = false;
   countries: Countries[];
   leagues: Leagues[];
   dateFrom = new FormControl();
@@ -22,6 +23,7 @@ export class LivescopeComponent implements OnInit {
   tableDataTabs = [];
   errorTitle: string;
   error: any;
+  displayStatus = 0;
   constructor(private appService: AppService) {}
 
   ngOnInit() {
@@ -31,23 +33,43 @@ export class LivescopeComponent implements OnInit {
     }, err => this.error = err);
   }
   getCountries(): void {
+    this.loading = true;
     this.appService.getCountries()
-    .subscribe(res => this.countries = res);
+    .subscribe(res => {
+      this.countries = res;
+      this.loading = false;
+    }, () => this.loading = false);
   }
   getLeagues(id: any): void {
+    this.loading = true;
     this.appService.getLeagues(id)
-    .subscribe(res => this.leagues = res,
-      err => {this.error = err; console.log(err)});
+    .subscribe(res => {
+      this.leagues = res;
+      this.loading = false;
+      },
+        err => {
+      this.error = err; console.log(err);
+      this.loading = false;
+    });
   }
   getEvents(): void {
+    this.displayStatus = 3;
+    this.loading = true;
     this.appService.getEvents(this.dateFrom.value, this.dateTo.value, this.league.value)
         .subscribe(res => {
           if (res.error) {
             this.errorTitle = res.message;
+            this.displayStatus = 1;
             console.log(res);
+            this.loading = false;
           }
-          this.tableDataTabs.push({time: new Date(), data: res})
-        }, err => {this.error = err; console.log(err)});
+          this.tableDataTabs.push({time: new Date(), data: res});
+          this.loading = false;
+        },
+            err => {
+          this.error = err;
+          this.loading = false;
+          console.log(err)});
   }
   handleDatapickerFrom(data) {
     this.dateFrom.setValue(`${data.year}-${data.month}-${data.day}`);
