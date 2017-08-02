@@ -21,13 +21,14 @@ export class LivescopeComponent implements OnInit {
   league = new FormControl('Select league');
   tableDataTabs = [];
   errorTitle: string;
+  error: any;
   constructor(private appService: AppService) {}
 
   ngOnInit() {
     this.getCountries();
     this.country.valueChanges.subscribe(val => {
       this.getLeagues(val);
-    });
+    }, err => this.error = err);
   }
   getCountries(): void {
     this.appService.getCountries()
@@ -35,18 +36,18 @@ export class LivescopeComponent implements OnInit {
   }
   getLeagues(id: any): void {
     this.appService.getLeagues(id)
-    .subscribe(res => {
-      this.leagues = res;
-    });
+    .subscribe(res => this.leagues = res,
+      err => {this.error = err; console.log(err)});
   }
   getEvents(): void {
     this.appService.getEvents(this.dateFrom.value, this.dateTo.value, this.league.value)
         .subscribe(res => {
           if (res.error) {
             this.errorTitle = res.message;
+            console.log(res);
           }
-          this.tableDataTabs.push({time: new Date(), data: res});
-        });
+          this.tableDataTabs.push({time: new Date(), data: res})
+        }, err => {this.error = err; console.log(err)});
   }
   handleDatapickerFrom(data) {
     this.dateFrom.setValue(`${data.year}-${data.month}-${data.day}`);

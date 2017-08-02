@@ -32,9 +32,9 @@
             </div>
         </div>
     </form>
+  <h4  *ngIf="errorTitle" class="text-center no-data">{{errorTitle}}</h4>
   <app-tab *ngIf="tableDataTabs.length; else unset" [data]="tableDataTabs"></app-tab>
   <ng-template #unset>
-    <!--<h4 *ngIf="!errorTitle" class="text-center no-data">No data</h4>-->
-    <h4  class="text-center no-data">{{errorTitle}}</h4>
+    <h4 class="text-center no-data">No data</h4>
   </ng-template>
 </div>
