@@ -21,7 +21,7 @@
                 <label for="league">Select league :</label>
                 <select class="form-control" id="league" [formControl]="league">
                     <option selected>Select league</option>
-                    <option *ngFor="let item of leagues">{{item.league_name}}</option>
+                    <option *ngFor="let item of leagues" [value]="item.league_id">{{item.league_name}}</option>
                 </select>
             </div>
             <div class="col">

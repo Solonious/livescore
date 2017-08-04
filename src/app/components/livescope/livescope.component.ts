@@ -16,6 +16,7 @@ export class LivescopeComponent implements OnInit {
   loading = false;
   countries: Countries[];
   leagues: Leagues[];
+  league_id: number;
   dateFrom = new FormControl();
   dateTo = new FormControl();
   country = new FormControl('Select country');
@@ -31,6 +32,9 @@ export class LivescopeComponent implements OnInit {
     this.country.valueChanges.subscribe(val => {
       this.getLeagues(val);
     }, err => this.error = err);
+    this.league.valueChanges.subscribe(val => {
+      this.league_id = val;
+    });
   }
   getCountries(): void {
     this.loading = true;
@@ -45,6 +49,7 @@ export class LivescopeComponent implements OnInit {
     this.appService.getLeagues(id)
     .subscribe(res => {
       this.leagues = res;
+      console.log(res);
       this.loading = false;
       },
         err => {
@@ -55,7 +60,7 @@ export class LivescopeComponent implements OnInit {
   getEvents(): void {
     this.displayStatus = 3;
     this.loading = true;
-    this.appService.getEvents(this.dateFrom.value, this.dateTo.value, this.league.value)
+    this.appService.getEvents(this.dateFrom.value, this.dateTo.value, this.league_id)
         .subscribe(res => {
           if (res.error) {
             this.errorTitle = res.message;

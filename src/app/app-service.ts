@@ -32,7 +32,7 @@ export class AppService {
         .catch(this.handleError);
   }
   getEvents(from: any, to: any, league_id: number): Observable<any> {
-    return this.http.get(`${this.apiFootbal}get_events&from=${from}&to=${to}&league_id&APIkey=${this.APIkey}`)
+    return this.http.get(`${this.apiFootbal}get_events&from=${from}&to=${to}&league_id=${league_id}&APIkey=${this.APIkey}`)
         .map(res => res.json() as any)
         .catch(this.handleError);
   }
